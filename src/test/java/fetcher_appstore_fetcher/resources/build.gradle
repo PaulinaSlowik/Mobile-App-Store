@@ -1,0 +1,12 @@
+package fetcher_appstore_fetcher.resources
+
+filegroup(
+        name = "resources",
+        srcs = glob(
+                include = ["**/*"],
+                exclude = [
+                        "BUILD",
+                ],
+        ),
+        visibility = ["//visibility:public"],
+)

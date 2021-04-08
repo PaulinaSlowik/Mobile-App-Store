@@ -1,0 +1,51 @@
+load("@rules_java//java:defs.bzl", "java_binary", "java_library", "java_plugin")
+load("//tools/bzl/spring-boot:spring-boot.bzl", "boot_jar")
+
+java_library(
+        name = "mobile-app-store-spy",
+        srcs = glob(["src/main/java/**/*.java"]),
+        resources = glob([
+                "src/main/resources/**/*",
+        ]),
+        visibility = [
+                "//visibility:public",
+        ],
+        deps = [
+                ":lombok_plugin",
+                "@lombok_maven//:org_projectlombok_lombok",
+                "@mobile_app_store_spy_maven//:com_fasterxml_jackson_core_jackson_annotations",
+                "@mobile_app_store_spy_maven//:com_fasterxml_jackson_core_jackson_core",
+                "@mobile_app_store_spy_maven//:com_fasterxml_jackson_core_jackson_databind",
+                "@mobile_app_store_spy_maven//:org_springframework_boot_spring_boot",
+                "@mobile_app_store_spy_maven//:org_springframework_boot_spring_boot_autoconfigure",
+                "@mobile_app_store_spy_maven//:org_springframework_boot_spring_boot_starter_tomcat",
+                "@mobile_app_store_spy_maven//:org_springframework_boot_spring_boot_starter_web",
+                "@mobile_app_store_spy_maven//:org_springframework_spring_beans",
+                "@mobile_app_store_spy_maven//:org_springframework_spring_context",
+                "@mobile_app_store_spy_maven//:org_springframework_spring_core",
+                "@mobile_app_store_spy_maven//:org_springframework_spring_web",
+        ],
+)
+
+java_binary(
+        name = "run",
+        main_class = "se.tink.backend.mobile_app_store_spy.MobileAppStoreSpyMain",
+        runtime_deps = [
+                ":mobile-app-store-spy",
+        ],
+)
+
+boot_jar(
+        name = "mobile-app-store-spy-deploy",
+        target = ":mobile-app-store-spy",
+)
+
+java_plugin(
+        name = "lombok_plugin",
+        generates_api = 1,
+        processor_class = "lombok.launch.AnnotationProcessorHider$AnnotationProcessor",
+        visibility = ["//visibility:public"],
+        deps = [
+                "@lombok_maven//:org_projectlombok_lombok",
+        ],
+)

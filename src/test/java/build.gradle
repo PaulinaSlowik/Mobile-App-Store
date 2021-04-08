@@ -1,0 +1,29 @@
+load("//tools/bzl:junit5.bzl", "java_junit5_test")
+
+java_junit5_test(
+        name = "mobile-app-store-spy-test",
+        srcs = glob(["**/*.java"]),
+        data = ["//src/mobile-app-store-spy/src/test/java/se/tink/backend/mobile_app_store_spy/fetcher_appstore_fetcher/resources"],
+        main_class = "third_party.junit5.BazelJUnit5ConsoleLauncher",
+        test_package = "se.tink.backend.mobile_app_store_spy",
+        visibility = ["//src/mobile-app-store-spy:__subpackages__"],
+        deps = [
+                "//src/mobile-app-store-spy",
+                "//third_party:com_google_guava_guava",
+                "//third_party/junit5:bazeljunit5",
+                "@lombok_maven//:org_projectlombok_lombok",
+                "@mobile_app_store_spy_maven//:com_fasterxml_jackson_core_jackson_annotations",
+                "@mobile_app_store_spy_maven//:com_fasterxml_jackson_core_jackson_core",
+                "@mobile_app_store_spy_maven//:com_fasterxml_jackson_core_jackson_databind",
+                "@mobile_app_store_spy_maven//:org_assertj_assertj_core",
+                "@mobile_app_store_spy_maven//:org_junit_jupiter_junit_jupiter_api",
+                "@mobile_app_store_spy_maven//:org_junit_jupiter_junit_jupiter_engine",
+                "@mobile_app_store_spy_maven//:org_junit_jupiter_junit_jupiter_params",
+                "@mobile_app_store_spy_maven//:org_mockito_mockito_core",
+                "@mobile_app_store_spy_maven//:org_springframework_boot_spring_boot_test",
+                "@mobile_app_store_spy_maven//:org_springframework_boot_spring_boot_test_autoconfigure",
+                "@mobile_app_store_spy_maven//:org_springframework_spring_beans",
+                "@mobile_app_store_spy_maven//:org_springframework_spring_test",
+                "@mobile_app_store_spy_maven//:org_springframework_spring_web",
+        ],
+)

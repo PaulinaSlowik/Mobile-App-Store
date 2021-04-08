@@ -1,0 +1,16 @@
+build_flags:
+  --test_output=all
+  --config=jdk11
+  --jvmopt=-Dspring.output.ansi.enabled=ALWAYS
+
+directories:
+  src/mobile-app-store-spy
+  third_party/junit5
+
+test_sources:
+  src/mobile-app-store-spy/src/test/*
+
+targets:
+  //src/mobile-app-store-spy/...
+
+java_language_level: 11
